@@ -36,7 +36,7 @@
 
 אין חסם שמונע התחלת פיתוח.
 
-GitHub CLI המקומי עדיין אינו מחובר, אבל Git דרך Credential Manager והחיבור של Codex ל־GitHub פעילים. פעולות שאינן נתמכות בחיבור מבוצעות בממשק GitHub המחובר.
+GitHub CLI המקומי מחובר, וכך גם Git דרך Credential Manager והחיבור של Codex ל־GitHub. פעולות שאינן נתמכות בחיבור מבוצעות בממשק GitHub המחובר.
 
 ## המשימה הפעילה
 
