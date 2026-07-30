@@ -20,3 +20,32 @@ jobs:
 
       - name: Validate project contracts
         run: node scripts/validate-governance.mjs
+
+  validate-app:
+    name: validate-app
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Audit production and development dependencies
+        run: npm run audit
+
+      - name: Run static checks, unit tests, and production build
+        run: npm run check
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run mobile smoke test
+        run: npm run test:e2e
