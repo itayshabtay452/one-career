@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+.next/
+out/
+coverage/
+test-results/
+playwright-report/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Local tool state
+.vercel/
+.supabase/
+.claude/settings.local.json
+.codex-log/
+
+# Worktrees and caches
+.claude/worktrees/
+.cache/
+*.log
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,54 @@
+name: דיווח באג
+description: התנהגות שגויה, רגרסיה או תקלה
+title: "[Bug] "
+labels:
+  - "type:bug"
+body:
+  - type: textarea
+    id: observed
+    attributes:
+      label: מה קרה
+      description: תיאור ההתנהגות בפועל.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: מה היה אמור לקרות
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: שלבי שחזור
+      placeholder: |
+        1. פתח...
+        2. לחץ...
+        3. ראה...
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: ראיות
+      description: צילום מסך, וידאו, log לא רגיש או קישור ל־Preview.
+
+  - type: dropdown
+    id: impact
+    attributes:
+      label: חומרה
+      options:
+        - נמוכה — קיימת דרך עקיפה
+        - בינונית — פוגעת ביכולת מרכזית
+        - גבוהה — חוסמת שימוש או מסכנת מידע
+    validations:
+      required: true
+
+  - type: textarea
+    id: regression
+    attributes:
+      label: בדיקת Regression מוצעת
+      description: איזו בדיקה תמנע מהבאג לחזור?

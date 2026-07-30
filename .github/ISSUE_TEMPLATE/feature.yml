@@ -1,0 +1,79 @@
+name: יכולת חדשה
+description: הצעה או משימת מימוש עבור התנהגות חדשה
+title: "[Feature] "
+labels:
+  - "type:feature"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Issue מוכן לעבודה רק כאשר התוצאה וקריטריוני הקבלה ברורים.
+
+  - type: textarea
+    id: outcome
+    attributes:
+      label: תוצאה רצויה
+      description: מה צריך להיות נכון או אפשרי בסיום?
+      placeholder: המשתמש יכול...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reason
+    attributes:
+      label: למה זה חשוב
+      description: איזו בעיה או צורך של המשתמש נפתרים?
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: בתוך המשימה
+      description: מה נכלל במפורש?
+    validations:
+      required: true
+
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: מחוץ למשימה
+      description: מה לא ייכלל כדי למנוע התרחבות שקטה?
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: קריטריוני קבלה
+      description: רשימת תרחישים שניתן לבדוק.
+      placeholder: |
+        - [ ] כאשר...
+        - [ ] אם...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: risk
+    attributes:
+      label: רמת סיכון
+      options:
+        - ירוק — פנימי וללא שינוי התנהגות מהותי
+        - צהוב — מוצר, UI, dependency, API או migration
+        - אדום — נתונים, Auth, סודות, רישוי, עלות או Production
+    validations:
+      required: true
+
+  - type: textarea
+    id: tests
+    attributes:
+      label: בדיקות נדרשות
+      description: אילו בדיקות אוטומטיות וידניות נדרשות?
+    validations:
+      required: true
+
+  - type: textarea
+    id: decisions
+    attributes:
+      label: החלטות או חסמים
+      description: החלטות משתמש, ADR, הרשאות או שירותים חיצוניים הנדרשים לפני התחלה.
