@@ -216,6 +216,7 @@ a {
   font-size: clamp(1.35rem, 7vw, 2.25rem);
   line-height: 1;
   letter-spacing: -0.04em;
+  white-space: nowrap;
 }
 
 .stat-card span {
@@ -237,6 +238,11 @@ a {
   width: 32px;
   height: 1px;
   background: var(--line);
+}
+
+[dir="rtl"] .brand,
+[dir="rtl"] .eyebrow {
+  letter-spacing: normal;
 }
 
 @media (min-width: 700px) {

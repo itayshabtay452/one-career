@@ -8,3 +8,12 @@ updates:
     labels:
       - "type:chore"
       - "risk:green"
+
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    labels:
+      - "type:chore"
+      - "risk:yellow"

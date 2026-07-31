@@ -13,13 +13,13 @@ export default function Home() {
       <div className="orb orb-orange" aria-hidden="true" />
 
       <header className="topbar">
-        <Link className="brand" href="/" aria-label="ONE CAREER home">
+        <Link className="brand" href="/" aria-label={dictionary.brandHomeLabel}>
           <span className="brand-mark" aria-hidden="true">
             1
           </span>
-          <span>ONE CAREER</span>
+          <span>{dictionary.brandName}</span>
         </Link>
-        <span className="build-tag">PRE-SEASON</span>
+        <span className="build-tag">{dictionary.buildTag}</span>
       </header>
 
       <section className="hero" aria-labelledby="launch-title">
@@ -27,13 +27,16 @@ export default function Home() {
         <h1 id="launch-title">{dictionary.title}</h1>
         <p className="hero-copy">{dictionary.description}</p>
 
-        <div className="status-card" role="status">
+        <div className="status-card">
           <span className="status-dot" aria-hidden="true" />
           <span>{dictionary.status}</span>
         </div>
       </section>
 
-      <section className="stat-grid" aria-label="Career format">
+      <section
+        className="stat-grid"
+        aria-label={dictionary.careerFormatLabel}
+      >
         {dictionary.stats.map((stat) => (
           <article className="stat-card" key={stat.label}>
             <strong>{stat.value}</strong>
@@ -43,9 +46,9 @@ export default function Home() {
       </section>
 
       <footer className="launch-footer">
-        <span>Career mode is being built.</span>
+        <span>{dictionary.footerLead}</span>
         <span className="footer-rule" aria-hidden="true" />
-        <span>Your story starts soon.</span>
+        <span>{dictionary.footerClosing}</span>
       </footer>
     </main>
   );
