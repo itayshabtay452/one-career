@@ -16,6 +16,7 @@ const requiredFiles = [
   "docs/decisions/ADR-000-template.md",
   "docs/decisions/ADR-002-nextjs-pwa-shell.md",
   "docs/decisions/ADR-003-deterministic-career-engine.md",
+  "docs/decisions/ADR-004-vertical-slice-shell.md",
   "docs/runbooks/RECOVERY.md",
   ".github/PULL_REQUEST_TEMPLATE.md",
   "package.json",
@@ -28,6 +29,8 @@ const requiredFiles = [
   "src/engine/types.ts",
   "src/engine/rng.ts",
   "src/engine/career.ts",
+  "src/slice/journal.ts",
+  "src/app/play/page.tsx",
   "public/sw.js",
   "scripts/run-e2e.mjs",
 ];
