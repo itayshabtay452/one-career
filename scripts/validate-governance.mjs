@@ -14,8 +14,17 @@ const requiredFiles = [
   "docs/WORKFLOW.md",
   "docs/decisions/README.md",
   "docs/decisions/ADR-000-template.md",
+  "docs/decisions/ADR-002-nextjs-pwa-shell.md",
   "docs/runbooks/RECOVERY.md",
   ".github/PULL_REQUEST_TEMPLATE.md",
+  "package.json",
+  "package-lock.json",
+  "tsconfig.json",
+  "next.config.ts",
+  "src/app/layout.tsx",
+  "src/app/page.tsx",
+  "public/sw.js",
+  "scripts/run-e2e.mjs",
 ];
 
 const errors = [];
