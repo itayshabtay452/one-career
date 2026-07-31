@@ -1,6 +1,6 @@
 # מצב הפרויקט
 
-עודכן: 30 ביולי 2026
+עודכן: 31 ביולי 2026
 
 ## שלב נוכחי
 
@@ -12,7 +12,7 @@
 
 [Issue #3](https://github.com/itayshabtay452/one-career/issues/3) — הקמת שלד Next.js PWA.
 
-העבודה נמצאת ב־[Draft PR #7](https://github.com/itayshabtay452/one-career/pull/7) על הענף `feat/3-nextjs-pwa`. ה־CI ירוק; הקוד טרם מוזג ל־`main` וממתין לסקירה עצמאית של Claude Desktop ולאישור מפורש של בעל הפרויקט.
+העבודה נמצאת ב־[Draft PR #7](https://github.com/itayshabtay452/one-career/pull/7) על הענף `feat/3-nextjs-pwa`. ה־CI ירוק; Claude Desktop השלים סקירה עצמאית, תיקוני הסקירה נדחפו והקוד ממתין לסקירה חוזרת ולאישור מפורש של בעל הפרויקט לפני מיזוג ל־`main`.
 
 ## מה קיים ב־main
 
@@ -55,7 +55,7 @@
 
 ## Pull Requests פתוחים
 
-- [Draft PR #7](https://github.com/itayshabtay452/one-career/pull/7) מקים את שלד ה־Next.js PWA. ה־CI ירוק, והוא ממתין לסקירת Claude Desktop ולאישור בעל הפרויקט לפני מיזוג.
+- [Draft PR #7](https://github.com/itayshabtay452/one-career/pull/7) מקים את שלד ה־Next.js PWA. ה־CI ירוק, הסקירה העצמאית הראשונה הושלמה ותיקוניה נדחפו; נדרשים סקירה חוזרת ואישור בעל הפרויקט לפני מיזוג.
 - [PR #1](https://github.com/itayshabtay452/one-career/pull/1) מעדכן את `actions/checkout` מ־v4 ל־v7. זהו שינוי dependency בגרסה ראשית, ולכן הוא מסווג צהוב וממתין לאישור מפורש של בעל הפרויקט לפני מיזוג.
 
 ## החלטות פתוחות
