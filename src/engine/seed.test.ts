@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { InvalidSeedError, UnsupportedVersionError } from "./errors";
 import { sampleSeed } from "./fixtures";
-import { isSupportedSeed, parseCareerSeed } from "./seed";
+import { START_AGE, isSupportedSeed, parseCareerSeed } from "./seed";
 import { SEED_VERSION } from "./types";
 
 describe("seed parsing", () => {
@@ -51,10 +51,17 @@ describe("seed parsing", () => {
     expect(error?.message).toContain("Goalkeepers are not playable");
   });
 
-  it("rejects out of range and non integer ages", () => {
-    expect(() => parseCareerSeed(sampleSeed({ startAge: 12 }))).toThrow(InvalidSeedError);
-    expect(() => parseCareerSeed(sampleSeed({ startAge: 25 }))).toThrow(InvalidSeedError);
-    expect(() => parseCareerSeed(sampleSeed({ startAge: 16.5 }))).toThrow(InvalidSeedError);
+  it("accepts exactly one start age", () => {
+    // Career length is defined for a start at 16. Allowing a band would move
+    // the 19 to 22 season range without anything saying so.
+    expect(parseCareerSeed(sampleSeed({ startAge: START_AGE })).startAge).toBe(16);
+
+    for (const startAge of [12, 15, 17, 18, 25, 16.5]) {
+      expect(() => parseCareerSeed(sampleSeed({ startAge }))).toThrow(InvalidSeedError);
+    }
+
+    const error = catchError(() => parseCareerSeed(sampleSeed({ startAge: 17 })));
+    expect(error?.message).toContain("must be exactly 16");
   });
 
   it("rejects empty identity fields", () => {

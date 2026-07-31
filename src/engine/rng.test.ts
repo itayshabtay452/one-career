@@ -81,6 +81,17 @@ describe("deterministic rng", () => {
     expect(() => createRng("alpha-run-01", "moment", -1)).toThrow(RangeError);
   });
 
+  it("refuses a bound wider than one draw instead of looping forever", () => {
+    // Above 2^32 the rejection limit computes to 0, so every draw would be
+    // rejected and the sampling loop would never terminate.
+    const rng = createRng("alpha-run-01", "moment", 0);
+
+    expect(() => rng.intBelow(0x100000000)).not.toThrow();
+    expect(() => rng.intBelow(0x100000001)).toThrow(RangeError);
+    expect(() => rng.intBetween(0, 0x100000000)).toThrow(RangeError);
+    expect(() => rng.intBetween(-0x80000000, 0x80000001)).toThrow(RangeError);
+  });
+
   it("is stable across builds", () => {
     // A golden vector. If this changes, every existing seed produces a
     // different career, which is a breaking change that needs a version bump.

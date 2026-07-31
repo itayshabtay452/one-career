@@ -34,12 +34,7 @@ export {
   type SaveMigration,
 } from "./persistence";
 
-export {
-  MAX_START_AGE,
-  MIN_START_AGE,
-  isSupportedSeed,
-  parseCareerSeed,
-} from "./seed";
+export { START_AGE, isSupportedSeed, parseCareerSeed } from "./seed";
 
 export { createRng, type Rng, type RngChannel } from "./rng";
 

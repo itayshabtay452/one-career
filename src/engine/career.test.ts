@@ -110,6 +110,55 @@ describe("season flow", () => {
     expect(JSON.stringify(state)).toBe(snapshot);
   });
 
+  it("never freezes or edits the action object it was given", () => {
+    // Freezing an argument is a visible mutation. A caller that keeps a draft
+    // action around and edits it must not find it frozen after applying it.
+    let state = startCareer();
+    const chooseDecision = {
+      type: "chooseDecision" as const,
+      decisionId: state.season.decisions[0]?.id ?? "",
+    };
+
+    state = applyAction(state, chooseDecision).state;
+    expect(Object.isFrozen(chooseDecision)).toBe(false);
+    expect(Object.isExtensible(chooseDecision)).toBe(true);
+
+    const playMoment = {
+      type: "playMoment" as const,
+      input: { choice: "shoot" as const, direction: 0, power: 60, timing: 0 },
+    };
+    state = applyAction(state, playMoment).state;
+    expect(Object.isFrozen(playMoment)).toBe(false);
+    expect(Object.isFrozen(playMoment.input)).toBe(false);
+
+    const advanceSeason = { type: "advanceSeason" as const };
+    applyAction(state, advanceSeason);
+    expect(Object.isFrozen(advanceSeason)).toBe(false);
+  });
+
+  it("keeps the logged copy independent of the caller's object", () => {
+    const state = startCareer();
+    const action = {
+      type: "playMoment" as const,
+      input: { choice: "shoot" as const, direction: 0, power: 60, timing: 0 },
+    };
+
+    const inMoment = applyAction(state, {
+      type: "chooseDecision",
+      decisionId: state.season.decisions[0]?.id ?? "",
+    }).state;
+    const logged = applyAction(inMoment, action).state.actionLog.at(-1);
+
+    // Editing the caller's object afterwards must not reach into the log.
+    action.input.power = 5;
+
+    expect(logged).toEqual({
+      type: "playMoment",
+      input: { choice: "shoot", direction: 0, power: 60, timing: 0 },
+    });
+    expect(Object.isFrozen(logged)).toBe(true);
+  });
+
   it("records every applied action in order", () => {
     const run = playScriptedCareer(sampleSeed(), scriptStyle({ variant: 2 }));
 

@@ -705,8 +705,32 @@ function expectPhase(state: CareerState, expected: SeasonState["phase"]): void {
   }
 }
 
+/**
+ * Copies an action into a value the engine owns.
+ *
+ * Freezing the caller's object would be a visible mutation of an argument, and
+ * the engine promises not to touch what it was given: a UI that keeps a draft
+ * action around and edits it must not find it frozen after applying it.
+ */
+function cloneAction(action: CareerAction): CareerAction {
+  switch (action.type) {
+    case "chooseDecision":
+      return Object.freeze({
+        type: "chooseDecision" as const,
+        decisionId: action.decisionId,
+      });
+    case "playMoment":
+      return Object.freeze({
+        type: "playMoment" as const,
+        input: Object.freeze({ ...action.input }),
+      });
+    default:
+      return Object.freeze({ type: "advanceSeason" as const });
+  }
+}
+
 function withAction(state: CareerState, action: CareerAction): readonly CareerAction[] {
-  return Object.freeze([...state.actionLog, Object.freeze(action)]);
+  return Object.freeze([...state.actionLog, cloneAction(action)]);
 }
 
 function applyChooseDecision(

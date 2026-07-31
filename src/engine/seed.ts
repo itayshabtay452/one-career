@@ -24,9 +24,15 @@ import {
  */
 const SEED_TEXT_PATTERN = /^[A-Za-z0-9_-]{4,64}$/;
 
-/** Ages the career rules are defined for. */
-export const MIN_START_AGE = 15;
-export const MAX_START_AGE = 18;
+/**
+ * The only age a career starts at.
+ *
+ * `docs/PRODUCT.md` fixes this at 16, and the 19 to 22 season range depends on
+ * it: a different start age would silently change how long a career runs. The
+ * parser therefore rejects any other value rather than accepting a band the
+ * rest of the rules were never written for.
+ */
+export const START_AGE = 16;
 
 /** Free text fields never feed a random draw, but they are still bounded. */
 const MAX_NAME_LENGTH = 40;
@@ -95,6 +101,20 @@ function requireInteger(
   return value;
 }
 
+function requireStartAge(value: unknown): number {
+  if (typeof value !== "number" || !Number.isInteger(value)) {
+    throw new InvalidSeedError('"startAge" must be an integer.');
+  }
+
+  if (value !== START_AGE) {
+    throw new InvalidSeedError(
+      `"startAge" must be exactly ${START_AGE}, got ${value}. Career length is defined for that start age only.`,
+    );
+  }
+
+  return value;
+}
+
 /**
  * Validates and normalises an unknown value into a `CareerSeed`.
  *
@@ -128,12 +148,7 @@ export function parseCareerSeed(value: unknown): CareerSeed {
     playerName: requireText(record.playerName, "playerName", MAX_NAME_LENGTH),
     nationality: requireText(record.nationality, "nationality", MAX_NAME_LENGTH),
     roleFamily: requireRoleFamily(record.roleFamily),
-    startAge: requireInteger(
-      record.startAge,
-      "startAge",
-      MIN_START_AGE,
-      MAX_START_AGE,
-    ),
+    startAge: requireStartAge(record.startAge),
     startYear: requireInteger(record.startYear, "startYear", 1900, 2200),
   });
 }

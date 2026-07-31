@@ -54,6 +54,9 @@ function hashString(text: string): () => number {
   };
 }
 
+/** Number of distinct values one draw can produce. */
+const OUTPUT_RANGE = 0x100000000;
+
 /** sfc32: 128 bit state, 32 bit output, integer only. */
 function sfc32(seedA: number, seedB: number, seedC: number, seedD: number): Rng {
   let a = seedA >>> 0;
@@ -75,6 +78,15 @@ function sfc32(seedA: number, seedB: number, seedC: number, seedD: number): Rng 
   const intBelow = (bound: number): number => {
     if (!Number.isInteger(bound) || bound < 1) {
       throw new RangeError(`intBelow requires a positive integer bound, got ${bound}.`);
+    }
+
+    // Above 2^32 the rejection limit below computes to 0, every draw is
+    // rejected and the loop never ends. A single uint32 cannot cover such a
+    // range anyway, so the bound is refused instead of hanging.
+    if (bound > OUTPUT_RANGE) {
+      throw new RangeError(
+        `intBelow supports bounds up to ${OUTPUT_RANGE}, got ${bound}. A wider range needs more than one draw.`,
+      );
     }
 
     if (bound === 1) {
@@ -104,7 +116,14 @@ function sfc32(seedA: number, seedB: number, seedC: number, seedD: number): Rng 
         throw new RangeError(`intBetween requires max >= min, got ${min}..${max}.`);
       }
 
-      return min + intBelow(max - min + 1);
+      const width = max - min + 1;
+      if (width > OUTPUT_RANGE) {
+        throw new RangeError(
+          `intBetween supports a span of at most ${OUTPUT_RANGE} values, got ${width} for ${min}..${max}.`,
+        );
+      }
+
+      return min + intBelow(width);
     },
     pick(values) {
       if (values.length === 0) {

@@ -12,7 +12,7 @@
 
 [Issue #4](https://github.com/itayshabtay452/one-career/issues/4) — הגדרת מנוע קריירה דטרמיניסטי ופורמט Seed.
 
-העבודה נמצאת ב־[Draft PR #10](https://github.com/itayshabtay452/one-career/pull/10) על הענף `feat/4-career-engine`. הסוכן הכותב הוא Claude Code; נדרשות סקירה עצמאית של Codex ואישור מפורש של בעל הפרויקט לפני מיזוג, כי המשימה מסווגת צהוב.
+העבודה נמצאת ב־[Draft PR #10](https://github.com/itayshabtay452/one-career/pull/10) על הענף `feat/4-career-engine`. הסוכן הכותב הוא Claude Code. Codex השלים סקירה עצמאית, חמשת ממצאיה טופלו, וה־PR ממתין לסקירה חוזרת ולאישור מפורש של בעל הפרויקט לפני מיזוג, כי המשימה מסווגת צהוב.
 
 ## מה קיים ב־main
 
@@ -33,7 +33,7 @@
 - API טהור: `createCareer`, `applyAction`, `replayCareer` ו־`computeLegacyInput`.
 - פורמט שמירה שמכיל Seed ויומן פעולות בלבד, עם שער גרסה ומנגנון migration.
 - עולם סינתטי של שלוש ליגות ושנים־עשר מועדונים בדויים.
-- 61 בדיקות: יחידה, replay על שמונה Seeds, שתי קריירות ייחוס נעולות ובדיקת שמירה על הדטרמיניזם.
+- 66 בדיקות: יחידה, replay על שמונה Seeds, שתי קריירות ייחוס נעולות ובדיקת שמירה על הדטרמיניזם.
 - ADR-003 שמתעד את ה־RNG, ה־Seed, מבנה המצב וה־migration.
 
 ## מה עדיין לא קיים
@@ -49,9 +49,9 @@
 
 אין חסם לפיתוח.
 
-## החלטה שממתינה לבעל הפרויקט
+## החלטות שהתקבלו במסגרת המשימה
 
-`docs/PRODUCT.md` קובע גם פרישה "סביב גיל 34–39" וגם "כ־18–22 עונות" בריצה מלאה. בהתחלה בגיל 16 שתי האמירות אינן מתיישבות במלואן. המנוע מיישם את החפיפה — גיל פרישה 34–37, כלומר 19–22 עונות — כהנחה מוצהרת. ראה [ADR-003](decisions/ADR-003-deterministic-career-engine.md).
+- אורך קריירה: התחלה בגיל 16 בלבד, גיל פרישה 34–37, כלומר 19–22 עונות. `docs/PRODUCT.md` עודכן והוא מקור האמת. הרקע ב־[ADR-003](decisions/ADR-003-deterministic-career-engine.md).
 
 ## המשימה הבאה
 
@@ -59,7 +59,7 @@
 
 ## Pull Requests פתוחים
 
-- [Draft PR #10](https://github.com/itayshabtay452/one-career/pull/10) מוסיף את מנוע הקריירה הדטרמיניסטי. מסווג צהוב; ממתין לסקירת Codex ולאישור בעל הפרויקט.
+- [Draft PR #10](https://github.com/itayshabtay452/one-career/pull/10) מוסיף את מנוע הקריירה הדטרמיניסטי. מסווג צהוב; סקירת Codex הושלמה וממצאיה טופלו, וממתינים סקירה חוזרת ואישור בעל הפרויקט.
 - [PR #9](https://github.com/itayshabtay452/one-career/pull/9) מעדכן את `typescript` מ־6.0.3 ל־7.0.2. עדכון בגרסה ראשית, מסווג צהוב.
 - [PR #8](https://github.com/itayshabtay452/one-career/pull/8) מעדכן את `actions/setup-node` מ־6 ל־7. עדכון בגרסה ראשית, מסווג צהוב.
 - [PR #1](https://github.com/itayshabtay452/one-career/pull/1) מעדכן את `actions/checkout` מ־v4 ל־v7. עדכון בגרסה ראשית, מסווג צהוב.

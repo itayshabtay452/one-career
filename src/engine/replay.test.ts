@@ -152,17 +152,71 @@ describe("save format", () => {
     ).toThrow(InvalidStateError);
   });
 
-  it("rejects a tampered action log on replay", () => {
+  it("rejects an action log that breaks the rules", () => {
     const run = playScriptedCareer(sampleSeed(), scriptStyle({ variant: 2 }));
     const save = toCareerSave(run.state);
 
     // Someone edited the log to claim a decision that was never offered.
-    const tampered = {
+    const illegal = {
       ...save,
       actionLog: [{ type: "chooseDecision", decisionId: "s0-transfer-cl-aurora" }],
     };
 
-    expect(() => loadCareerSave(tampered)).toThrow(InvalidActionError);
+    expect(() => loadCareerSave(illegal)).toThrow(InvalidActionError);
+  });
+
+  it("usually invalidates the rest of the log when a moment is edited", () => {
+    // Decision option ids depend on the career state, so an edited moment
+    // changes development, which changes which offers exist later, which makes
+    // the logged decision ids unreachable. Tamper resistance in practice comes
+    // largely from this coupling rather than from a signature.
+    const run = playScriptedCareer(sampleSeed(), scriptStyle({ variant: 2 }));
+    const save = toCareerSave(run.state);
+
+    const momentIndex = save.actionLog.findIndex(
+      (action) => action.type === "playMoment",
+    );
+    const edited = save.actionLog.map((action, index) =>
+      index === momentIndex
+        ? {
+            type: "playMoment" as const,
+            input: { choice: "shoot" as const, direction: 0, power: 50, timing: 0 },
+          }
+        : action,
+    );
+
+    expect(() => loadCareerSave({ ...save, actionLog: edited })).toThrow(
+      InvalidActionError,
+    );
+  });
+
+  it("accepts an edited log that stays internally consistent, and says so", () => {
+    // This is the limit of what replay proves, and it is worth stating rather
+    // than assuming. A replay shows a log is CONSISTENT WITH THE RULES; it does
+    // not show the player actually made those inputs. Edit the last moment,
+    // with nothing after it to contradict, and the save loads with a different
+    // result. Authenticity of a ranked run must therefore come from the server:
+    // per REVIEW.md the client is not the authority on a graded result.
+    const run = playScriptedCareer(sampleSeed(), scriptStyle({ variant: 2 }));
+    const save = toCareerSave(run.state);
+
+    const momentIndex = save.actionLog.findIndex(
+      (action) => action.type === "playMoment",
+    );
+    const shortened = [
+      ...save.actionLog.slice(0, momentIndex),
+      {
+        type: "playMoment" as const,
+        input: { choice: "shoot" as const, direction: 0, power: 50, timing: 0 },
+      },
+    ];
+
+    const loaded = loadCareerSave({ ...save, actionLog: shortened });
+
+    expect(loaded.state.season.phase).toBe("summary");
+    expect(loaded.state.season.momentResult?.score).not.toBe(
+      run.state.history[0]?.momentScore,
+    );
   });
 
   it("rejects a save whose seed is no longer supported", () => {
