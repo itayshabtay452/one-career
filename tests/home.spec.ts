@@ -62,4 +62,28 @@ test("manifest exposes PNG icons for install surfaces", async ({ request }) => {
       }),
     ]),
   );
+
+  const appleIconResponse = await request.get("/apple-touch-icon.png");
+  expect(appleIconResponse.ok()).toBe(true);
+  const appleIcon = await appleIconResponse.body();
+  expect(appleIcon.readUInt32BE(16)).toBe(180);
+  expect(appleIcon.readUInt32BE(20)).toBe(180);
+  expect(appleIcon[25]).toBe(2);
+});
+
+test("service worker precaches the current PWA shell", async ({ request }) => {
+  const response = await request.get("/sw.js");
+
+  expect(response.ok()).toBe(true);
+  const serviceWorker = await response.text();
+  expect(serviceWorker).toContain('const CACHE_NAME = "one-career-shell-v2"');
+  expect(serviceWorker).not.toContain('"/icon.svg"');
+
+  for (const iconPath of [
+    "/icon-192.png",
+    "/icon-512.png",
+    "/apple-touch-icon.png",
+  ]) {
+    expect(serviceWorker).toContain(`"${iconPath}"`);
+  }
 });
