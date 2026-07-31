@@ -4,7 +4,7 @@ import { defaultLocale } from "@/i18n/config";
 import { dictionaries } from "@/i18n/dictionaries";
 
 export default function Home() {
-  const dictionary = dictionaries[defaultLocale];
+  const dictionary = dictionaries[defaultLocale].home;
 
   return (
     <main className="launch-shell" data-testid="launch-screen">
@@ -31,6 +31,10 @@ export default function Home() {
           <span className="status-dot" aria-hidden="true" />
           <span>{dictionary.status}</span>
         </div>
+
+        <Link className="play-cta" href="/play" data-testid="play-cta">
+          {dictionary.playCta}
+        </Link>
       </section>
 
       <section

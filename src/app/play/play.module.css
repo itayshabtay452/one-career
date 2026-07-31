@@ -1,0 +1,727 @@
+/*
+ * Styles for the three season slice.
+ *
+ * Mobile-first: the base rules target a 320px viewport and the single media
+ * query only widens things. Colours come from the tokens in globals.css so the
+ * slice stays part of the same design system.
+ */
+
+.shell {
+  display: flex;
+  min-height: 100svh;
+  width: min(100%, 720px);
+  margin: 0 auto;
+  padding: 18px 16px 32px;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px 8px 4px;
+  border-radius: 12px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.sliceBadge {
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--lime);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+.card {
+  padding: 20px 18px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.heading {
+  margin: 0 0 10px;
+  font-size: clamp(1.5rem, 7vw, 2.1rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.subheading {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+/* Player creation ------------------------------------------------------- */
+
+.field {
+  display: flex;
+  margin-bottom: 16px;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.input {
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: var(--text);
+  background: rgba(5, 16, 11, 0.6);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.input::placeholder {
+  color: rgba(166, 183, 170, 0.7);
+}
+
+.readonlyValue {
+  display: flex;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+  align-items: center;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
+.error {
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 122, 61, 0.5);
+  border-radius: 12px;
+  color: #ffd2b9;
+  background: rgba(255, 122, 61, 0.12);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.notice {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.74rem;
+}
+
+/* Buttons --------------------------------------------------------------- */
+
+.primary,
+.secondary,
+.ghost {
+  min-height: 48px;
+  padding: 13px 18px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.primary {
+  width: 100%;
+  color: #07110d;
+  background: var(--lime);
+}
+
+.secondary {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--line);
+}
+
+.ghost {
+  min-height: 40px;
+  padding: 8px 12px;
+  color: var(--muted);
+  background: none;
+  border-color: var(--line);
+  font-size: 0.76rem;
+}
+
+.primary:disabled,
+.secondary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* A visible focus ring on every interactive element, in both directions. */
+.shell :focus-visible {
+  outline: 3px solid var(--lime);
+  outline-offset: 2px;
+}
+
+/* HUD ------------------------------------------------------------------- */
+
+.hud {
+  display: grid;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(5, 16, 11, 0.55);
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.hudItem {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hudLabel {
+  color: var(--muted);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hudValue {
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.meters {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.meter {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meterHead {
+  display: flex;
+  width: 100%;
+  align-items: baseline;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.7rem;
+}
+
+.meterValue {
+  color: var(--text);
+  font-weight: 800;
+}
+
+.meterTrack {
+  display: block;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.meterFill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--lime);
+}
+
+/* Decisions ------------------------------------------------------------- */
+
+.optionList {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+}
+
+.option {
+  display: flex;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.04);
+  flex-direction: column;
+  gap: 8px;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.optionTitle {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.optionBody {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  padding: 4px 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.tagPositive {
+  color: var(--lime);
+  border-color: rgba(188, 255, 56, 0.4);
+}
+
+.tagNegative {
+  color: var(--orange);
+  border-color: rgba(255, 122, 61, 0.4);
+}
+
+/* Moment ---------------------------------------------------------------- */
+
+.steps {
+  display: flex;
+  margin: 0 0 16px;
+  padding: 0;
+  gap: 8px;
+  list-style: none;
+}
+
+.step {
+  flex: 1;
+  padding: 8px 4px;
+  border-top: 2px solid var(--line);
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.stepActive {
+  border-top-color: var(--lime);
+  color: var(--lime);
+}
+
+.pitch {
+  width: 100%;
+  height: auto;
+  margin-bottom: 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(5, 16, 11, 0.5);
+}
+
+.choiceGrid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.choice {
+  min-height: 60px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.04);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.fieldset {
+  margin: 0 0 18px;
+  padding: 0;
+  border: 0;
+}
+
+.legend {
+  margin-bottom: 6px;
+  padding: 0;
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.directionRow {
+  display: grid;
+  margin-top: 8px;
+  gap: 6px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.directionOption {
+  position: relative;
+}
+
+.directionInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.directionLabel {
+  display: flex;
+  min-height: 52px;
+  padding: 6px 2px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-align: center;
+  cursor: pointer;
+}
+
+.directionInput:checked + .directionLabel {
+  border-color: var(--lime);
+  color: #07110d;
+  background: var(--lime);
+}
+
+.directionInput:focus-visible + .directionLabel {
+  outline: 3px solid var(--lime);
+  outline-offset: 2px;
+}
+
+.slider {
+  width: 100%;
+  height: 44px;
+  accent-color: var(--lime);
+}
+
+.sliderValue {
+  color: var(--lime);
+  font-weight: 800;
+}
+
+.timingTrack {
+  position: relative;
+  height: 46px;
+  margin: 10px 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(5, 16, 11, 0.6);
+  overflow: hidden;
+}
+
+.timingTarget {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 16%;
+  background: rgba(188, 255, 56, 0.16);
+  transform: translateX(-50%);
+}
+
+.timingCentre {
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 50%;
+  width: 2px;
+  background: rgba(188, 255, 56, 0.7);
+}
+
+.timingMarker {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  width: 5px;
+  border-radius: 3px;
+  background: var(--text);
+}
+
+.timingMarkerLocked {
+  background: var(--lime);
+}
+
+.timingRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.actions {
+  display: flex;
+  margin-top: 18px;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Summary and end ------------------------------------------------------- */
+
+.resultBadge {
+  display: inline-flex;
+  margin-bottom: 12px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.resultDecisive {
+  color: #07110d;
+  background: var(--lime);
+  border-color: var(--lime);
+}
+
+.resultPositive {
+  color: var(--lime);
+  border-color: rgba(188, 255, 56, 0.45);
+}
+
+.resultPoor {
+  color: var(--orange);
+  border-color: rgba(255, 122, 61, 0.45);
+}
+
+.statRow {
+  display: grid;
+  margin-bottom: 16px;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.stat {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.statLabel {
+  display: block;
+  color: var(--muted);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.statValue {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.changeGroup {
+  margin-bottom: 14px;
+}
+
+.changeHeading {
+  margin: 0 0 8px;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.changeList {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  gap: 6px;
+  list-style: none;
+}
+
+.changeItem {
+  display: flex;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 0.84rem;
+}
+
+.changeDelta {
+  font-weight: 800;
+}
+
+.deltaUp {
+  color: var(--lime);
+}
+
+.deltaDown {
+  color: var(--orange);
+}
+
+.legacyBlock {
+  margin-bottom: 18px;
+  padding: 20px 16px;
+  border: 1px solid rgba(188, 255, 56, 0.35);
+  border-radius: 18px;
+  background: rgba(188, 255, 56, 0.07);
+  text-align: center;
+}
+
+.legacyScore {
+  display: block;
+  font-size: clamp(3rem, 18vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.legacyScale {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.legacyTitle {
+  display: block;
+  margin-top: 10px;
+  color: var(--lime);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.timeline {
+  display: flex;
+  margin: 0 0 16px;
+  padding: 0;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+}
+
+.timelineItem {
+  display: flex;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-inline-start: 3px solid var(--lime);
+  border-radius: 12px;
+  flex-direction: column;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.timelineHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.timelineBody {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.impact {
+  margin: 0 0 18px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+@media (min-width: 620px) {
+  .shell {
+    padding: 28px 24px 40px;
+    gap: 22px;
+  }
+
+  .card {
+    padding: 26px 24px;
+  }
+
+  .hud {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .choiceGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .actions {
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+  }
+
+  .primary {
+    width: auto;
+    min-width: 200px;
+  }
+}
