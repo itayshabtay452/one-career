@@ -28,5 +28,6 @@ playwright-report/
 # Editors and operating systems
 .vscode/
 .idea/
+.obsidian/
 .DS_Store
 Thumbs.db
