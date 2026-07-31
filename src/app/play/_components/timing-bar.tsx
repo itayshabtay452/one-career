@@ -17,7 +17,8 @@ type TimingBarProps = {
   describedBy: string;
   /** Locked timing on the engine scale, -100..100, or null while unset. */
   value: number | null;
-  onChange: (timing: number) => void;
+  /** Called with the locked value on stop, and with null when a run starts. */
+  onChange: (timing: number | null) => void;
 };
 
 /**
@@ -77,6 +78,10 @@ export function TimingBar({ labels, describedBy, value, onChange }: TimingBarPro
 
   const start = () => {
     startedAtRef.current = 0;
+    // Clear the previous attempt. Without this the caller would still hold the
+    // old timing and could play the moment while the marker is moving, sending
+    // a value that does not match what the player is doing.
+    onChange(null);
     setRunning(true);
   };
 

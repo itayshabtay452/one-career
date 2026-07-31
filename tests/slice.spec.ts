@@ -166,3 +166,24 @@ test("asks for the details it needs before starting", async ({ page }) => {
   await expect(page.getByTestId("create-error")).toBeVisible();
   await expect(page.getByTestId("decision-list")).toHaveCount(0);
 });
+
+test("locks the submit button again when a new timing run starts", async ({ page }) => {
+  // Restarting the sweep must clear the locked value. Otherwise the moment
+  // could be played with the timing from the previous attempt while the marker
+  // is still moving, so the result would not match what the player just did.
+  await createPlayer(page);
+  await page.getByTestId("decision-list").getByRole("button").first().click();
+  await page.getByTestId("moment-read-continue").click();
+  await page.getByTestId("moment-choice-shoot").click();
+
+  await page.getByTestId("timing-start").click();
+  await page.getByTestId("timing-stop").click();
+  await expect(page.getByTestId("moment-submit")).toBeEnabled();
+
+  await page.getByTestId("timing-start").click();
+  await expect(page.getByTestId("moment-submit")).toBeDisabled();
+  await expect(page.getByTestId("timing-value")).toBeEmpty();
+
+  await page.getByTestId("timing-stop").click();
+  await expect(page.getByTestId("moment-submit")).toBeEnabled();
+});
