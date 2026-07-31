@@ -10,9 +10,7 @@
 
 ## המשימה הפעילה
 
-[Issue #5](https://github.com/itayshabtay452/one-career/issues/5) — Vertical Slice סינתטי של שלוש עונות למשפחת ההתקפה.
-
-העבודה נמצאת ב־[Draft PR #12](https://github.com/itayshabtay452/one-career/pull/12) על הענף `feat/5-vertical-slice`. הסוכן הכותב הוא Claude Code; נדרשות סקירה עצמאית של Codex ואישור מפורש של בעל הפרויקט לפני מיזוג, כי המשימה מסווגת צהוב.
+אין. [Issue #5](https://github.com/itayshabtay452/one-career/issues/5) נסגר ב־31 ביולי 2026 ותור העבודה ריק. יש לפתוח את אבני הדרך של השלב הבא לפני שממשיכים.
 
 ## מה קיים ב־main
 
@@ -25,9 +23,6 @@
 - נוהל שחזור שנבדק באמצעות clone נקי.
 - שלד Next.js App Router עם TypeScript strict, מסך השקה mobile-first, תשתית locale ו־RTL, PWA עם manifest, אייקוני PNG ו־service worker, וכותרות אבטחה בסיסיות.
 - מנוע קריירה דטרמיניסטי ב־`src/engine` עם RNG בשלמים, זרמים בעלי שם, פורמט Seed ושמירה, ו־ADR-003.
-
-## מה מוכן בענף הפעיל
-
 - מסלול `/play` שאפשר לשחק בו: יצירת שחקן, שלוש עונות ומסך סיום.
 - בכל עונה: החלטת קריירה, רגע `Read → Choose → Execute` וסיכום שמסביר מה השתנה ולמה.
 - קלט רגע בדיד ונגיש: כיוון כ־`radiogroup`, עוצמה כ־slider ותזמון שמכומת מסמן נע.
@@ -58,11 +53,14 @@
 
 ## המשימות הבאות
 
-אין Issue פתוח נוסף מעבר ל־#5. לאחר מיזוג הפרוסה יש לפתוח את אבני הדרך של השלב הבא.
+תור העבודה ריק. מועמדות שעולות מהפערים המתועדים למעלה:
+
+1. הרחבת הפרוסה לקריירה מלאה של 19–22 עונות.
+2. נוסחת ה־Legacy Score הסופית יחד עם איזון המשחק.
+3. מנגנון החלפת שפה למשתמש; המילון העברי כבר מלא.
 
 ## Pull Requests פתוחים
 
-- [Draft PR #12](https://github.com/itayshabtay452/one-career/pull/12) מוסיף את פרוסת שלוש העונות. מסווג צהוב; ממתין לסקירת Codex ולאישור בעל הפרויקט.
 - [PR #9](https://github.com/itayshabtay452/one-career/pull/9) מעדכן את `typescript` מ־6.0.3 ל־7.0.2. עדכון בגרסה ראשית, מסווג צהוב.
 - [PR #8](https://github.com/itayshabtay452/one-career/pull/8) מעדכן את `actions/setup-node` מ־6 ל־7. עדכון בגרסה ראשית, מסווג צהוב.
 - [PR #1](https://github.com/itayshabtay452/one-career/pull/1) מעדכן את `actions/checkout` מ־v4 ל־v7. עדכון בגרסה ראשית, מסווג צהוב.
