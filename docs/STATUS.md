@@ -10,53 +10,59 @@
 
 ## המשימה הפעילה
 
-[Issue #3](https://github.com/itayshabtay452/one-career/issues/3) — הקמת שלד Next.js PWA.
+[Issue #4](https://github.com/itayshabtay452/one-career/issues/4) — הגדרת מנוע קריירה דטרמיניסטי ופורמט Seed.
 
-העבודה נמצאת ב־[Draft PR #7](https://github.com/itayshabtay452/one-career/pull/7) על הענף `feat/3-nextjs-pwa`. ה־CI ירוק; Claude Desktop השלים סקירה עצמאית, תיקוני הסקירה נדחפו והקוד ממתין לסקירה חוזרת ולאישור מפורש של בעל הפרויקט לפני מיזוג ל־`main`.
+העבודה נמצאת ב־[Draft PR #10](https://github.com/itayshabtay452/one-career/pull/10) על הענף `feat/4-career-engine`. הסוכן הכותב הוא Claude Code; נדרשות סקירה עצמאית של Codex ואישור מפורש של בעל הפרויקט לפני מיזוג, כי המשימה מסווגת צהוב.
 
 ## מה קיים ב־main
 
-- תוכנית מוצר ל־V1.
-- חוזה עבודה משותף לסוכנים.
-- מסמכי מוצר, ארכיטקטורה, אבטחה וסקירה.
+- תוכנית מוצר ל־V1, חוזה עבודה לסוכנים ומסמכי מוצר, ארכיטקטורה, אבטחה וסקירה.
 - מדיניות לשינוי החלטות ולעבודה באמצעות Pull Requests.
 - מאגר GitHub ציבורי: [itayshabtay452/one-career](https://github.com/itayshabtay452/one-career).
-- תבניות Issue ו־PR, CODEOWNERS ו־Dependabot.
-- CI בשם `validate-governance`.
-- Ruleset שמחייב PR, שיחות סקירה פתורות ו־`validate-governance`, וחוסם מחיקה ו־force-push.
+- תבניות Issue ו־PR, CODEOWNERS ו־Dependabot לפעולות GitHub ול־npm.
+- CI עם שתי בדיקות נדרשות: `validate-governance` ו־`validate-app`.
+- Ruleset שמחייב PR, שיחות סקירה פתורות ושתי הבדיקות, וחוסם מחיקה ו־force-push.
 - נוהל שחזור שנבדק באמצעות clone נקי.
+- שלד Next.js App Router עם TypeScript strict, מסך השקה mobile-first, תשתית locale ו־RTL, PWA עם manifest, אייקוני PNG ו־service worker, וכותרות אבטחה בסיסיות.
 
 ## מה מוכן בענף הפעיל
 
-- Next.js App Router עם TypeScript strict.
-- מסך השקה אנגלי, mobile-first ורספונסיבי.
-- תשתית locale וכיווניות שמוכנה לעברית ול־RTL.
-- PWA manifest, אייקון ו־service worker מוגבל למעטפת הציבורית ולנכסים סטטיים.
-- כותרות אבטחה בסיסיות.
-- lint, typecheck, בדיקות יחידה, build, audit ובדיקת smoke במובייל.
-- הרחבת CI לבדיקת האפליקציה.
+- מנוע קריירה דטרמיניסטי ב־`src/engine`, ללא תלות ב־React, ב־Phaser, ב־Supabase או בספק נתונים.
+- RNG בשלמים בלבד עם זרמים בעלי שם, ווקטור זהב שנועל את הרצף.
+- טיפוסי ליבה: `CareerSeed`, `CareerState`, `SeasonState`, `CareerDecision`, `MomentInput`, `MomentResult` ו־`LegacyInput`.
+- API טהור: `createCareer`, `applyAction`, `replayCareer` ו־`computeLegacyInput`.
+- פורמט שמירה שמכיל Seed ויומן פעולות בלבד, עם שער גרסה ומנגנון migration.
+- עולם סינתטי של שלוש ליגות ושנים־עשר מועדונים בדויים.
+- 61 בדיקות: יחידה, replay על שמונה Seeds, שתי קריירות ייחוס נעולות ובדיקת שמירה על הדטרמיניזם.
+- ADR-003 שמתעד את ה־RNG, ה־Seed, מבנה המצב וה־migration.
 
 ## מה עדיין לא קיים
 
-- מנוע משחק או קריירה.
-- מסך playable.
-- שמירות, Auth או בסיס נתונים.
+- מסך playable שמחובר למנוע.
+- Phaser ורגעי משחק חזותיים.
+- נוסחת Legacy Score ואיזון משחק.
+- שמירות מתמשכות, Auth או בסיס נתונים.
 - Supabase, Vercel או ספק נתוני כדורגל.
 - Preview ציבורי.
 
 ## חסם נוכחי
 
-אין חסם לפיתוח. Git דרך Credential Manager והחיבורים של Codex ושל Claude Desktop ל־GitHub פעילים. GitHub CLI המקומי אינו נדרש לזרימה הזו.
+אין חסם לפיתוח.
 
-## המשימות הבאות
+## החלטה שממתינה לבעל הפרויקט
 
-1. [Issue #4](https://github.com/itayshabtay452/one-career/issues/4) — הגדרת מנוע קריירה דטרמיניסטי ופורמט Seed.
-2. [Issue #5](https://github.com/itayshabtay452/one-career/issues/5) — Vertical Slice סינתטי של שלוש עונות למשפחת ההתקפה.
+`docs/PRODUCT.md` קובע גם פרישה "סביב גיל 34–39" וגם "כ־18–22 עונות" בריצה מלאה. בהתחלה בגיל 16 שתי האמירות אינן מתיישבות במלואן. המנוע מיישם את החפיפה — גיל פרישה 34–37, כלומר 19–22 עונות — כהנחה מוצהרת. ראה [ADR-003](decisions/ADR-003-deterministic-career-engine.md).
+
+## המשימה הבאה
+
+1. [Issue #5](https://github.com/itayshabtay452/one-career/issues/5) — Vertical Slice סינתטי של שלוש עונות למשפחת ההתקפה.
 
 ## Pull Requests פתוחים
 
-- [Draft PR #7](https://github.com/itayshabtay452/one-career/pull/7) מקים את שלד ה־Next.js PWA. ה־CI ירוק, הסקירה העצמאית הראשונה הושלמה ותיקוניה נדחפו; נדרשים סקירה חוזרת ואישור בעל הפרויקט לפני מיזוג.
-- [PR #1](https://github.com/itayshabtay452/one-career/pull/1) מעדכן את `actions/checkout` מ־v4 ל־v7. זהו שינוי dependency בגרסה ראשית, ולכן הוא מסווג צהוב וממתין לאישור מפורש של בעל הפרויקט לפני מיזוג.
+- [Draft PR #10](https://github.com/itayshabtay452/one-career/pull/10) מוסיף את מנוע הקריירה הדטרמיניסטי. מסווג צהוב; ממתין לסקירת Codex ולאישור בעל הפרויקט.
+- [PR #9](https://github.com/itayshabtay452/one-career/pull/9) מעדכן את `typescript` מ־6.0.3 ל־7.0.2. עדכון בגרסה ראשית, מסווג צהוב.
+- [PR #8](https://github.com/itayshabtay452/one-career/pull/8) מעדכן את `actions/setup-node` מ־6 ל־7. עדכון בגרסה ראשית, מסווג צהוב.
+- [PR #1](https://github.com/itayshabtay452/one-career/pull/1) מעדכן את `actions/checkout` מ־v4 ל־v7. עדכון בגרסה ראשית, מסווג צהוב.
 
 ## החלטות פתוחות
 
